@@ -20,10 +20,21 @@ This repository provides an autonomous, self-contained, deterministic reproducti
 - Python 3.10+
 - `pip install unvibecode==0.3.15`
 
-### Run Reproduction
+### Run Single-Script Reproduction
 ```bash
 python reproduce_bug.py
 ```
+
+### Run 5-Dimension Deep Verification Suite
+```bash
+python test_deduplication_deep.py
+```
+This tests:
+1. **Transitive Chain Collapse**: Proves 75% finding loss across 4 Cypress controllers (`/transactions`, `/notifications`, `/bankAccounts`, `/contacts`).
+2. **Score Inversion Sensitivity**: Proves the victim flips dynamically based on arbitrary total score.
+3. **Orthogonal Family Boundaries**: Proves different risk families do not collide.
+4. **True Duplicate Preservation**: Proves genuine `DUPLICATE_IMPLEMENTATION` candidates are still deduplicated (zero regressions).
+5. **Selection Capacity Integrity**: Proves Step 05's `MAXIMUM_PER_FAMILY=2` policy was being artificially starved.
 
 ### Verified Output
 ```text
