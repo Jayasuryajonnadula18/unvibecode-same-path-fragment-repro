@@ -1,0 +1,15 @@
+{
+  "schema_version": "shipreadyv2.repository_context_bundle.v1",
+  "repository": "cypress-realworld-app",
+  "tokenizer": "fast_conservative_code_estimate",
+  "source_files": 170,
+  "atomic_code_sections": 369,
+  "verified_cross_file_connections": 377,
+  "skipped_files": [],
+  "contents": {
+    "chunks.jsonl": "One self-contained source-code section per line.",
+    "connections.jsonl": "Verified connections between code sections.",
+    "selections.jsonl": "Precomputed narrow, optimal and wider selections per file.",
+    "README.md": "Usage guidance for batch or API analysis."
+  }
+}

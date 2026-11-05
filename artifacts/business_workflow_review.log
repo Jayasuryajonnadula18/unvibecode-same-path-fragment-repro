@@ -1,0 +1,152 @@
+Scanning workspace: C:\Users\MAHESH\AppData\Local\Programs\Microsoft VS Code\cypress-realworld-app
+Parsing source files: 170
+[STAGE 1 COMPLETE] 170 files, 132 internal file edges, 0 package-level edges, 623 unresolved/external imports, 0 symbol edges, 0 unresolved Go usages
+
+[SHIPREADYV2 LINKER RESOLUTION COMPLETE]
+Output: C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\shipreadyv2_resolved_graph.json
+Files indexed: 170
+Imports: 129 resolved, 0 package-level, 15 partial, 593 unresolved, 18 hard-path skipped, 0 uncertain
+Python enrichment: 0 files, 0 safe constants, 0 dynamic imports marked
+Symbols: 240/1,451 resolved; 15 ambiguous names in index
+Symbol edges added: 245
+Go symbol edges promoted: 0; unresolved Go usages: 0
+
+[SHIPREADYV2 LLM FEED COMPLETE]
+Repository: C:\Users\MAHESH\AppData\Local\Programs\Microsoft VS Code\cypress-realworld-app
+Resolved graph: C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\shipreadyv2_resolved_graph.json
+Atomic chunks: 355
+Chunk relationships: 562
+LLM batches: 34
+Feed: C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\shipreadyv2_llm_feed.jsonl
+Tokenizer: tiktoken:cl100k_base
+
+[SHIPREADYV2 SEMANTIC PACKS COMPLETE]
+Source 12K batches: 34
+Semantic packs: 4
+Semantic token range: 35,000 target-min / 55,000 target / 75,000 hard
+Packing guard: 73,500 content/context base + up to 1,500 bridge tokens
+  semantic_pack_001: 58,835 tokens, 5 source batches, 1 component(s), within-range
+  semantic_pack_002: 68,117 tokens, 7 source batches, 1 component(s), within-range
+  semantic_pack_003: 40,413 tokens, 6 source batches, 3 component(s), within-range
+  semantic_pack_004: 53,960 tokens, 16 source batches, 16 component(s), within-range
+Semantic feed: C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\shipreadyv2_semantic_packs.jsonl
+
+[SHIPREADYV2 UNIFIED PIPELINE COMPLETE]
+Target folder: C:\Users\MAHESH\AppData\Local\Programs\Microsoft VS Code\cypress-realworld-app
+Run folder:    C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run
+Resolved JSON: C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\shipreadyv2_resolved_graph.json
+LLM feed:      C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\shipreadyv2_llm_feed.jsonl
+Semantic feed: C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\shipreadyv2_semantic_packs.jsonl
+
+[SHIPREADYV2 PASS 1 INPUT PREPARATION COMPLETE]
+Semantic input:  C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\shipreadyv2_semantic_packs.jsonl
+Compact taxonomy:C:\Users\MAHESH\AppData\Local\Temp\unvibecode-engine-1w6m2p3h\engine\archetype_taxonomy_pass1_compact.yaml
+Output JSONL:    C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\shipreadyv2_pass1_llm_inputs.jsonl
+Tokenizer:       tiktoken:cl100k_base
+Shared context:  9,600 tokens
+Taxonomy routing: 7,902 LLM classification tokens; 9,174 deterministic-only tokens
+Semantic packs:  4
+LLM requests:    7
+Request tokens: min=40,135, avg=53,201, max=65,468
+Requests per semantic pack:
+  semantic_pack_001: 2
+  semantic_pack_002: 2
+  semantic_pack_003: 1
+  semantic_pack_004: 2
+Next: run exactly two pass1_semantic_request records for quality review.
+[SHIPREADYV2 PASS 1 FULL REPOSITORY RUN]
+Input:      C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\shipreadyv2_pass1_llm_inputs.jsonl
+Environment:C:\Users\MAHESH\AppData\Local\Temp\unvibecode-engine-1w6m2p3h\engine\.env
+Runner:     full-v3-parallel-partial-20260717
+Model:      gpt-5.4-mini
+Reasoning:  low
+Risk triggers: NOT supplied to the LLM; deterministic stage only
+Validated 7 prepared requests; selected=7; reused=0; pending=7
+Running 7 pending Pass 1 request(s) with concurrency=2; each request gets one initial attempt and at most one validation correction.
+[2/7] START semantic_pack_001_part_02 | attempt=1/2, input=65,915, reasoning=low, max_output=32,000
+[1/7] START semantic_pack_001_part_01 | attempt=1/2, input=53,508, reasoning=low, max_output=32,000
+  ... semantic_pack_001_part_02 attempt 1 still processing (10s elapsed)
+  ... semantic_pack_001_part_01 attempt 1 still processing (10s elapsed)
+  ... semantic_pack_001_part_02 attempt 1 still processing (20s elapsed)
+  ... semantic_pack_001_part_01 attempt 1 still processing (20s elapsed)
+  ... semantic_pack_001_part_02 attempt 1 still processing (30s elapsed)
+  ... semantic_pack_001_part_01 attempt 1 still processing (30s elapsed)
+  ... semantic_pack_001_part_02 attempt 1 still processing (40s elapsed)
+[2/7] DONE semantic_pack_001_part_02 in 40.1s | input=73469, cached=6579, output=4295, reasoning=148 | paths=2, facts=9, evidence=31
+  ... semantic_pack_001_part_01 attempt 1 still processing (40s elapsed)
+[3/7] START semantic_pack_002_part_01 | attempt=1/2, input=49,739, reasoning=low, max_output=32,000
+  ... semantic_pack_001_part_01 attempt 1 still processing (50s elapsed)
+  ... semantic_pack_002_part_01 attempt 1 still processing (10s elapsed)
+[1/7] DONE semantic_pack_001_part_01 in 54.7s | input=60751, cached=6579, output=6739, reasoning=125 | paths=2, facts=10, evidence=35
+[4/7] START semantic_pack_002_part_02 | attempt=1/2, input=57,339, reasoning=low, max_output=32,000
+[3/7] FAILED semantic_pack_002_part_01 on attempt 1; other requests continue.
+semantic_pack_002_part_01: one validation correction attempt.
+[3/7] START semantic_pack_002_part_01 | attempt=2/2, input=49,852, reasoning=low, max_output=32,000
+[4/7] DONE semantic_pack_002_part_02 in 8.5s | input=64357, cached=6579, output=899, reasoning=64 | paths=0, facts=0, evidence=7
+[5/7] START semantic_pack_003_part_01 | attempt=1/2, input=58,006, reasoning=low, max_output=32,000
+  ... semantic_pack_002_part_01 attempt 2 still processing (10s elapsed)
+[5/7] DONE semantic_pack_003_part_01 in 8.5s | input=65323, cached=6579, output=845, reasoning=97 | paths=0, facts=0, evidence=4
+[6/7] START semantic_pack_004_part_01 | attempt=1/2, input=40,648, reasoning=low, max_output=32,000
+  ... semantic_pack_002_part_01 attempt 2 still processing (20s elapsed)
+[3/7] DONE semantic_pack_002_part_01 in 23.2s | input=57030, cached=6579, output=2952, reasoning=191 | paths=1, facts=6, evidence=19
+[7/7] START semantic_pack_004_part_02 | attempt=1/2, input=50,546, reasoning=low, max_output=32,000
+  ... semantic_pack_004_part_01 attempt 1 still processing (10s elapsed)
+  ... semantic_pack_004_part_02 attempt 1 still processing (10s elapsed)
+  ... semantic_pack_004_part_01 attempt 1 still processing (20s elapsed)
+[7/7] DONE semantic_pack_004_part_02 in 13.8s | input=57768, cached=6579, output=1495, reasoning=177 | paths=0, facts=0, evidence=10
+[6/7] DONE semantic_pack_004_part_01 in 24.8s | input=47627, cached=6579, output=3398, reasoning=146 | paths=1, facts=4, evidence=17
+
+[SHIPREADYV2 PASS 1 FULL REPOSITORY RUN COMPLETE]
+Completion: COMPLETE
+Successful: 7/7
+Results:    C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\shipreadyv2_pass1_full_results.jsonl
+Trace:      C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\shipreadyv2_pass1_full_trace.jsonl
+Artifacts:  C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\shipreadyv2_pass1_full_artifacts
+[SHIPREADYV2 BUSINESS PATH COMPILER]
+Report folder: C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run
+Pass 1 results: C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\shipreadyv2_pass1_full_results.jsonl
+Prepared input: C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\shipreadyv2_pass1_llm_inputs.jsonl
+Resolved graph: C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\shipreadyv2_resolved_graph.json
+Semantic packs: optional integrity source; not required at runtime
+
+[COMPILATION COMPLETE]
+Scan: COMPLETE (7/7 requests)
+Normalized paths: 6
+Components: 3
+Output: C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\normalized_business_paths.json
+Workflow context: C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\business_workflow_context.html
+Coverage: C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\business_path_coverage.json
+Audit: C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\business_path_compiler_audit.jsonl
+[SHIPREADYV2 STEP 3 - CRITICAL BUSINESS INSIGHT SELECTOR]
+Report folder:      C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run
+Normalized paths:   C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\normalized_business_paths.json
+Coverage:           C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\business_path_coverage.json
+Resolved graph:     C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\shipreadyv2_resolved_graph.json
+Prepared code input:C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\shipreadyv2_pass1_llm_inputs.jsonl
+LLM calls:          none
+Compiler artifacts: read-only
+Validated repository cypress-realworld-app: paths=6, evidence=84, prepared_chunks=355
+[1/6] proving candidates for business_path_e0050026511ee242
+[2/6] proving candidates for business_path_005a3eab6bf1afae
+[3/6] proving candidates for business_path_86a9e09c921ccbcd
+[4/6] proving candidates for business_path_55fdfc9eb6ba48a0
+[5/6] proving candidates for business_path_754a4b2a65891955
+[6/6] proving candidates for business_path_12814f4cfd29335a
+
+[STEP 3 COMPLETE]
+Candidates:          10
+Selected:            0 (minimum not forced)
+Investigation gaps:  0
+Rejected/duplicates: 10
+Selected reporting ceilings (detection count is unchanged):
+  CONFIRMED_FLAW: 0
+  EVIDENCE_BACKED_RISK: 0
+  INVESTIGATION_HYPOTHESIS: 0
+  WORKFLOW_OBSERVATION: 0
+  NOT_REPORTABLE: 0
+Step 4 rule: may downgrade; must not upgrade.
+Results:             C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\selected_business_insights_v4.json
+Summary:             C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\insight_selection_summary_v4.json
+Audit:               C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\insight_selector_audit_v4.jsonl
+
+[NO-FINDINGS OUTCOME] Step 06 skipped because zero candidates met the reporting threshold. Customer no-findings report created at C:\Users\MAHESH\AppData\Local\Temp\uvc-0btibl15\b\run\shipreadyv2_customer_business_flaw_report_no_findings.html
