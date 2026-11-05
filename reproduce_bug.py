@@ -314,9 +314,12 @@ def main() -> int:
 
     print("\n" + "=" * 80)
     if bug_confirmed:
-        print(">>> RESULT: DEFECT REPRODUCED 100% DETERMINISTICALLY <<<")
-        print("  - Baseline 0.3.15 incorrectly demoted notification candidate to DUPLICATE_OR_VARIANT.")
-        print("  - Fixed grouping retained both distinct business workflows as ELIGIBLE_STRONG.")
+        print(">>> RESULT: MECHANISM DEFECT REPRODUCED DETERMINISTICALLY <<<")
+        print("  SAME_PATH_FRAGMENT deduplication behavior reproduced deterministically using")
+        print("  actual UnvibeCode 0.3.15 Step 04 and Step 05 functions with constructed candidate")
+        print("  fixtures and authentic Cypress repository-context evidence.")
+        print("  Note: End-to-end candidate suppression in the completed Cypress analysis")
+        print("  remains to be independently verified once raw candidate artifacts are captured.")
         print("=" * 80)
         return 0
     else:

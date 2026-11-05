@@ -234,22 +234,26 @@ def run_all_tests():
     # ---------------------------------------------------------------------------------------------
     # TEST 5: Downstream select_candidates() Selection Capacity (MAXIMUM_PER_FAMILY=2)
     # ---------------------------------------------------------------------------------------------
-    print("\n[TEST 5] Downstream select_candidates() Selection Capacity (MAXIMUM_PER_FAMILY=2)")
+    print("\n[TEST 5] Downstream select_candidates() Execution & Capacity (MAXIMUM_PER_FAMILY=2)")
     print(f"  UnvibeCode MAXIMUM_PER_FAMILY config: {step5.MAXIMUM_PER_FAMILY}")
     print(f"  UnvibeCode MINIMUM_SELECTION_SCORE:   {step5.MINIMUM_SELECTION_SCORE}")
 
-    # Compare how many candidates reach select_candidates()
-    # In Baseline: only 1 candidate remains eligible, so at most 1 can ever be selected.
-    # In Fixed: 2 candidates remain eligible, and both fit within MAXIMUM_PER_FAMILY=2.
-    eligible_baseline = [c for c in base_cands_t1 if c["decision"] in {"ELIGIBLE_STRONG", "ELIGIBLE_BOUNDED"}]
-    eligible_fixed = [c for c in fixed_cands_t1 if c["decision"] in {"ELIGIBLE_STRONG", "ELIGIBLE_BOUNDED"}]
+    # Prepare fixtures with required fields for Cython native selector
+    for c in base_cands_t1 + fixed_cands_t1:
+        c.setdefault("structural_corroboration", {})
 
-    print(f"  Candidates eligible for selection (Baseline): {len(eligible_baseline)}")
-    print(f"  Candidates eligible for selection (Fixed):    {len(eligible_fixed)}")
+    # Execute actual native select_candidates() on both candidate pools
+    selected_baseline = step5.select_candidates(base_cands_t1)
+    selected_fixed = step5.select_candidates(fixed_cands_t1)
 
-    assert len(eligible_baseline) == 1
-    assert len(eligible_fixed) == 4
-    print("  [PASS] TEST 5: Selection capacity verified. Deduplication bug was artificially starving select_candidates().")
+    print(f"  Actual selected findings (Baseline): {len(selected_baseline)} (IDs: {[x['insight_id'] for x in selected_baseline]})")
+    print(f"  Actual selected findings (Fixed):    {len(selected_fixed)} (IDs: {[x['insight_id'] for x in selected_fixed]})")
+
+    # In Baseline, false deduplication killed 3 candidates before selection, leaving only 1 available
+    assert len(selected_baseline) == 1, f"Expected 1 selected in baseline, got {len(selected_baseline)}"
+    # In Fixed, all 4 candidates are eligible; select_candidates() correctly caps at MAXIMUM_PER_FAMILY=2
+    assert len(selected_fixed) == 2, f"Expected 2 selected in fixed (enforcing MAXIMUM_PER_FAMILY=2), got {len(selected_fixed)}"
+    print("  [PASS] TEST 5: Actual select_candidates() executed. Proved deduplication artificially starved downstream selection capacity.")
 
     print("\n" + "=" * 80)
     print("ALL 5 RIGOROUS VERIFICATION TESTS PASSED WITH 100% FIDELITY")
