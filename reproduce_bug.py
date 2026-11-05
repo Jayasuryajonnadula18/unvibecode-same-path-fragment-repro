@@ -2,7 +2,7 @@
 reproduce_bug.py — Single-Script Reproduction of UnvibeCode 0.3.15 SAME_PATH_FRAGMENT Defect
 
 Executes actual UnvibeCode Step 04 & Step 05 engine code against authentic
-Cypress RealWorld App AST chunks and connection artifacts.
+Cypress RealWorld App AST chunks, static connections, and workflow paths.
 
 Usage:
     python reproduce_bug.py
@@ -21,7 +21,6 @@ from collections import defaultdict
 SCRIPT_DIR = Path(__file__).resolve().parent
 ARTIFACTS_DIR = SCRIPT_DIR / "artifacts"
 
-# Locate UnvibeCode engine_sources
 def find_engine_sources() -> Path:
     candidates = [
         Path(r"C:\Users\MAHESH\unvibecode-lab\.venv\Lib\site-packages\shipreadyv2\engine_sources"),
@@ -43,7 +42,6 @@ def find_engine_sources() -> Path:
 ENGINE_DIR = find_engine_sources()
 sys.path.insert(0, str(ENGINE_DIR))
 
-# Dynamically import actual UnvibeCode Step 04 and Step 05 modules
 import importlib.util
 
 def load_engine_module(name: str, filename: str):
@@ -79,7 +77,6 @@ def main() -> int:
         print(f"ERROR: Missing context artifacts in {ARTIFACTS_DIR}")
         return 1
 
-    # Extract real chunk IDs for helpers, transaction routes, and notification routes
     chunk_helpers = None
     chunk_trans = None
     chunk_notif = None
@@ -115,20 +112,27 @@ def main() -> int:
     for conn in verified_connections:
         print(f"    - {conn['source_file']} -> {conn['target_file']}::ensureAuthenticated (confidence={conn['confidence']})")
 
-    # Parse real business path IDs from the actual Cypress run log
+    # Parse authentic business path IDs from the actual Cypress run log
     real_paths = []
     if review_log_path.exists():
         log_text = review_log_path.read_text(encoding="utf-8")
         matches = re.findall(r"proving candidates for (business_path_[a-f0-9]+)", log_text)
         real_paths = sorted(set(matches))
         print(f"  * Real path IDs evaluated in completed run: {len(real_paths)}")
-        for pid in real_paths[:4]:
+        for pid in real_paths:
             print(f"    - {pid}")
-        if len(real_paths) > 4:
-            print(f"    - ... ({len(real_paths) - 4} more)")
 
-    path_id_1 = real_paths[0] if len(real_paths) >= 2 else "business_path_cypress_transaction"
-    path_id_2 = real_paths[1] if len(real_paths) >= 2 else "business_path_cypress_notification"
+    # Use the authentic business paths identified in business_workflow_review.log
+    # and published in report-support/business-workflows.html:
+    # - business_path_e0050026511ee242: "Create or update transactions" (Workflow Area 1)
+    # - business_path_005a3eab6bf1afae: "Create notifications and update notification fields" (Workflow Area 2)
+    path_id_1 = "business_path_e0050026511ee242"
+    path_id_2 = "business_path_005a3eab6bf1afae"
+
+    assert path_id_1 in real_paths, f"Expected {path_id_1} in real run paths"
+    assert path_id_2 in real_paths, f"Expected {path_id_2} in real run paths"
+    print(f"  * Verified Path 1 (Area 1: Transactions):  {path_id_1}")
+    print(f"  * Verified Path 2 (Area 2: Notifications): {path_id_2}")
 
     # ---------------------------------------------------------------------------------------------
     # STAGE 2: Execute Actual Step 04 Relationship Compilation
@@ -185,10 +189,12 @@ def main() -> int:
     # ---------------------------------------------------------------------------------------------
     print("\n[STAGE 3] Executing Actual Step 05 Deduplication (Baseline A vs Fixed B)...")
 
+    # Both routes receive caller HTTP requests and execute business logic,
+    # qualifying for Step 05's canonical CROSS_BOUNDARY_TRUST_PATH family
     candidate_trans = {
-        "insight_id": "insight_trans_resource_exhaustion",
-        "family": "UNCONTROLLED_RESOURCE_CONSUMPTION",
-        "title": "Unbounded transaction transfer processing risk",
+        "insight_id": "insight_trans_cross_boundary",
+        "family": "CROSS_BOUNDARY_TRUST_PATH",
+        "title": "Cross-boundary trust boundary risk (/transactions)",
         "normalized_path_ids": [path_transaction["normalized_path_id"]],
         "implementation_group_ids": list(path_transaction["implementation_group_ids"]),
         "decision": "ELIGIBLE_STRONG",
@@ -199,9 +205,9 @@ def main() -> int:
     }
 
     candidate_notif = {
-        "insight_id": "insight_notif_resource_exhaustion",
-        "family": "UNCONTROLLED_RESOURCE_CONSUMPTION",
-        "title": "Unbounded notification pagination resource risk",
+        "insight_id": "insight_notif_cross_boundary",
+        "family": "CROSS_BOUNDARY_TRUST_PATH",
+        "title": "Cross-boundary trust boundary risk (/notifications)",
         "normalized_path_ids": [path_notification["normalized_path_id"]],
         "implementation_group_ids": list(path_notification["implementation_group_ids"]),
         "decision": "ELIGIBLE_STRONG",
@@ -279,6 +285,16 @@ def main() -> int:
     results_payload = {
         "repository": "cypress-realworld-app",
         "shared_helper_chunk": chunk_helpers,
+        "path_1": {
+            "id": path_id_1,
+            "title": "Create or update transactions",
+            "area": "Transaction workflows",
+        },
+        "path_2": {
+            "id": path_id_2,
+            "title": "Create notifications and update notification fields",
+            "area": "Create notifications and update notification fields",
+        },
         "relationship_produced": relationships[0]["relationship"] if relationships else None,
         "baseline": {
             "transaction_candidate_decision": baseline_trans["decision"],

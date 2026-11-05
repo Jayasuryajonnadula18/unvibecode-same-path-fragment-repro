@@ -1,6 +1,16 @@
 {
   "repository": "cypress-realworld-app",
   "shared_helper_chunk": "chunk_c6bf2b29827021a9",
+  "path_1": {
+    "id": "business_path_e0050026511ee242",
+    "title": "Create or update transactions",
+    "area": "Transaction workflows"
+  },
+  "path_2": {
+    "id": "business_path_005a3eab6bf1afae",
+    "title": "Create notifications and update notification fields",
+    "area": "Create notifications and update notification fields"
+  },
   "relationship_produced": "SAME_PATH_FRAGMENT",
   "baseline": {
     "transaction_candidate_decision": "ELIGIBLE_STRONG",
@@ -8,7 +18,7 @@
     "notification_rejection_reasons": [
       {
         "code": "DUPLICATE_RISK_DIMENSION",
-        "reason": "A stronger representative exists: insight_trans_resource_exhaustion"
+        "reason": "A stronger representative exists: insight_trans_cross_boundary"
       }
     ]
   },
